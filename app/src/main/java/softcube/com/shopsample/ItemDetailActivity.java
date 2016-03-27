@@ -4,14 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.softcube.softcubelib.SoftCubeClient;
+
+import softcube.com.shopsample.dummy.DummyContent;
 
 /**
  * An activity representing a single Item detail screen. This
@@ -21,6 +23,7 @@ import com.softcube.softcubelib.SoftCubeClient;
  */
 public class ItemDetailActivity extends AppCompatActivity {
     SoftCubeClient softCubeClient;
+    private DummyContent.DummyItem mSelectedItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +36,8 @@ public class ItemDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
+                DummyContent.addItemToCart(mSelectedItem);
+                Snackbar.make(view, getString(R.string.item_added), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -57,8 +61,9 @@ public class ItemDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ItemDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID));
+            String itemId =  getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID);
+            mSelectedItem = DummyContent.ITEM_MAP.get(itemId);
+            arguments.putString(ItemDetailFragment.ARG_ITEM_ID, itemId);
             ItemDetailFragment fragment = new ItemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -84,10 +89,11 @@ public class ItemDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
-        softCubeClient.pageView("ProductDetailsPage");
+        softCubeClient.pageView("ItemDetailsPage");
     }
 
 }

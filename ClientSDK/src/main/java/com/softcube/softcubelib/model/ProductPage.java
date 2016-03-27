@@ -12,7 +12,7 @@ public class ProductPage {
     private String productKey;
     @SerializedName("isInStock")
     @Expose
-    private int isInStock;
+    private boolean isInStock;
     @SerializedName("price")
     @Expose
     private double price;
@@ -20,8 +20,13 @@ public class ProductPage {
     @Expose
     private List<String> tags;
 
+
+
     public  static ProductPage create(String productKey, double price, boolean isInStock){
         ProductPage productPage = new ProductPage();
+        productPage.setProductKey(productKey);
+        productPage.setPrice(price);
+        productPage.setIsInStock(isInStock);
         return productPage;
     }
 
@@ -60,7 +65,7 @@ public class ProductPage {
      * @return
      * The isInStock
      */
-    public int getIsInStock() {
+    public boolean getIsInStock() {
         return isInStock;
     }
 
@@ -69,7 +74,7 @@ public class ProductPage {
      * @param isInStock
      * The isInStock
      */
-    public void setIsInStock(int isInStock) {
+    public void setIsInStock(boolean isInStock) {
         this.isInStock = isInStock;
     }
 

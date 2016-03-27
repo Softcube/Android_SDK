@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.softcube.softcubelib.SoftCubeClient;
+import com.softcube.softcubelib.model.ProductPage;
 
 import softcube.com.shopsample.dummy.DummyContent;
 
@@ -74,5 +75,7 @@ public class ItemDetailFragment extends Fragment {
     public void onStart() {
         super.onStart();
         softCubeClient.pageView("ProductDetailsPage");
+        ProductPage productPage = ProductPage.create(mItem.id, mItem.price, true);
+        softCubeClient.productPage(productPage);
     }
 }

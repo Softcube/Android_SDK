@@ -11,6 +11,7 @@ import java.util.UUID;
 
 public class StatusCartData extends BaseData{
 
+    private static final String EVENT_NAME = "StatusCart";
 
     @SerializedName("StatusCart")
     @Expose
@@ -20,9 +21,11 @@ public class StatusCartData extends BaseData{
     private String GUID;
 
 
+
+
     public static StatusCartData create(Context context, String userName, String userEmail, List<CartItem>  cartItems){
         StatusCartData statusCartData = new StatusCartData();
-        GeneralInfo generalInfo = GeneralInfo.create(context, userName, userEmail);
+        GeneralInfo generalInfo = GeneralInfo.create(context, EVENT_NAME, userName, userEmail);
         statusCartData.setGeneralInfo(generalInfo);
 
         statusCartData.setCartItems(cartItems);

@@ -10,6 +10,8 @@ import java.util.List;
 
 public class PurchasedItemsData extends  BaseData{
 
+    private static final String EVENT_NAME = "PurchasedItems";
+
     @SerializedName("OrderNumber")
     @Expose
     private String orderNumber;
@@ -53,7 +55,7 @@ public class PurchasedItemsData extends  BaseData{
 
     public static PurchasedItemsData create(Context context, String userName, String userEmail, String orderNumber, String GUID){
         PurchasedItemsData purchasedItemsData = new PurchasedItemsData();
-        GeneralInfo generalInfo = GeneralInfo.create(context, userName, userEmail);
+        GeneralInfo generalInfo = GeneralInfo.create(context, EVENT_NAME, userName, userEmail);
         purchasedItemsData.setGeneralInfo(generalInfo);
 
         purchasedItemsData.setOrderNumber(orderNumber);

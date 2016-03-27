@@ -13,6 +13,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class GeneralInfo {
 
@@ -51,8 +52,9 @@ public class GeneralInfo {
     private Device device;
 
 
-    public static GeneralInfo create(Context context, String userName, String userEmail){
+    public static GeneralInfo create(Context context, String eventName, String userName, String userEmail){
         GeneralInfo generalInfo = new GeneralInfo();
+
         Device device = new Device();
         Screendim screendim = new Screendim();
 
@@ -76,7 +78,7 @@ public class GeneralInfo {
 
         //Get current time
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM d yyyy HH:mm:ss Z");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM d yyyy HH:mm:ss z", Locale.US);
         String dateString = sdf.format(date);
 
         //Get device
@@ -86,7 +88,7 @@ public class GeneralInfo {
         device.setVersion(Build.MODEL);
         device.setOs(Build.VERSION.RELEASE);
 
-
+        generalInfo.setEventName(eventName);
         generalInfo.setDatetime(dateString);
         generalInfo.setScreendim(screendim);
         generalInfo.setDevice(device);

@@ -19,6 +19,12 @@ public class DummyContent {
     public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
 
     /**
+     * A map of sample (dummy) items in cart
+     */
+    public static final Map<String, DummyItem> CART = new HashMap<String, DummyItem>();
+
+
+    /**
      * A map of sample (dummy) items, by ID.
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
@@ -62,6 +68,7 @@ public class DummyContent {
         public final String content;
         public final String details;
         public final double price;
+        public int quantity;
 
 
         public DummyItem(String id, String content, String details, double price) {
@@ -69,11 +76,23 @@ public class DummyContent {
             this.content = content;
             this.details = details;
             this.price = price;
+            this.quantity = 0;
         }
 
         @Override
         public String toString() {
             return content;
+        }
+    }
+
+
+    public static void addItemToCart(DummyItem item){
+        if(CART.containsKey(item.id)){
+            DummyItem dummyItem = CART.get(item.id);
+            dummyItem.quantity++;
+        } else {
+            item.quantity++;
+            CART.put(item.id, item);
         }
     }
 }

@@ -42,10 +42,6 @@
             android:label="@string/title_item_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ItemCartActivity"
-            android:label="@string/title_item_list"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ItemDetailActivity"
             android:label="@string/title_item_detail"
             android:parentActivityName=".ItemListActivity"

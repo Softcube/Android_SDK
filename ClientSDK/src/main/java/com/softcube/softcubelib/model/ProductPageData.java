@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class ProductPageData extends  BaseData{
 
+    private static final String EVENT_NAME = "ProductPage";
+
     @SerializedName("ProductPage")
     @Expose
     private ProductPage productPage;
@@ -34,7 +36,7 @@ public class ProductPageData extends  BaseData{
 
     public static ProductPageData create(Context context, String userName, String userEmail, ProductPage productPage){
         ProductPageData productPageData = new ProductPageData();
-        GeneralInfo generalInfo = GeneralInfo.create(context, userName, userEmail);
+        GeneralInfo generalInfo = GeneralInfo.create(context, EVENT_NAME, userName, userEmail);
         productPageData.setGeneralInfo(generalInfo);
 
         productPageData.setProductPage(productPage);

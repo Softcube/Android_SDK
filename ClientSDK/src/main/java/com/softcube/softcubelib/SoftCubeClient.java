@@ -19,7 +19,6 @@ import com.softcube.softcubelib.networking.SCHttpClient;
 
 import java.lang.reflect.Type;
 import java.util.List;
-
 /**
  * Created by OwlDeveloper on 26.12.15.
  */
@@ -36,43 +35,53 @@ public class SoftCubeClient {
     }
 
 
-    public void pageView(String pageUrl){
+    public PageViewData pageView(String pageUrl){
         if (checkNetwork()) {
             PageViewData data = PageViewData.create(context, userName, userEmail, pageUrl);
             Type type = new TypeToken<PageViewData>(){}.getType();
             new SCRequestTask(data, type).execute();
+            return data;
         }
+        return null;
     }
-    public void productPage(ProductPage productPage){
+    public ProductPageData productPage(ProductPage productPage){
         if (checkNetwork()) {
             ProductPageData data = ProductPageData.create(context, userName, userEmail, productPage);
             Type type = new TypeToken<ProductPageData>(){}.getType();
             new SCRequestTask(data, type).execute();
+            return data;
         }
+        return null;
     }
 
-    public void statusCart(List<CartItem> cartItems){
+    public StatusCartData statusCart(List<CartItem> cartItems){
         if (checkNetwork()) {
             StatusCartData data = StatusCartData.create(context, userName, userEmail, cartItems);
             Type type = new TypeToken<StatusCartData>(){}.getType();
             new SCRequestTask(data, type).execute();
+            return data;
         }
+        return null;
     }
 
-    public void purchasedItems(String orderNumber, String GUID){
+    public PurchasedItemsData purchasedItems(String orderNumber, String GUID){
         if (checkNetwork()) {
             PurchasedItemsData data = PurchasedItemsData.create(context, userName, userEmail, orderNumber, GUID);
             Type type = new TypeToken<PurchasedItemsData>(){}.getType();
             new SCRequestTask(data, type).execute();
+            return data;
         }
+        return null;
     }
 
-    public void purchasedItems(String orderNumber, String GUID, List<CartItem> purchasedItems){
+    public PurchasedItemsData purchasedItems(String orderNumber, String GUID, List<CartItem> purchasedItems){
         if (checkNetwork()) {
             PurchasedItemsData data = PurchasedItemsData.create(context, userName, userEmail, orderNumber, GUID, purchasedItems);
             Type type = new TypeToken<PurchasedItemsData>(){}.getType();
             new SCRequestTask(data, type).execute();
+            return data;
         }
+        return null;
     }
 
     public static void setUserName(String userName){
@@ -104,12 +113,9 @@ public class SoftCubeClient {
         }
 
 
-
-
-        // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            //textView.setText(result);
+
         }
     }
 

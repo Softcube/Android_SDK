@@ -1,6 +1,8 @@
 package softcube.com.shopsample;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -34,6 +36,7 @@ public class ItemListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
+    private DummyContent.DummyItem mSelectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +52,28 @@ public class ItemListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
-                Intent intent = new Intent(ItemListActivity.this, ShopingCartActivity.class);
-                startActivity(intent);
+                if(mTwoPane && mSelectedItem != null){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ItemListActivity.this);
+                    builder.setMessage(getString(R.string.select_action))
+                            .setNegativeButton(getString(R.string.add_to_cart),
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            DummyContent.addItemToCart(mSelectedItem);
+                                        }
+                                    })
+                            .setPositiveButton(getString(R.string.goto_cart),
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            Intent intent = new Intent(ItemListActivity.this, ShopingCartActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                } else {
+                    Intent intent = new Intent(ItemListActivity.this, ShopingCartActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -92,13 +113,14 @@ public class ItemListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mPrice.setText(""+ mValues.get(position).price);
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mPrice.setText(""+ mValues.get(position).price + " $");
+            holder.mIdView.setText(mValues.get(position).content);
+            holder.mContentView.setText(getString(R.string.tags_sample));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    mSelectedItem = DummyContent.ITEM_MAP.get(holder.mItem.id);
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
                         arguments.putString(ItemDetailFragment.ARG_ITEM_ID, holder.mItem.id);

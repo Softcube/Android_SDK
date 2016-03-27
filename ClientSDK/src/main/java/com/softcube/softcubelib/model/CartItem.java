@@ -12,7 +12,7 @@ public class CartItem {
     private String productId;
     @SerializedName("price")
     @Expose
-    private int price;
+    private double price;
     @SerializedName("quantity")
     @Expose
     private int quantity;
@@ -30,9 +30,21 @@ public class CartItem {
     @Expose
     private List<String> tags;
 
+    public  static CartItem create(String productId,  double price, String priceCurrencyCode, int quantity, double unitPrice){
+        CartItem cartItem = new CartItem(productId, price,  priceCurrencyCode,  quantity,  unitPrice, null, null);
+        return cartItem;
+    }
 
 
-
+    public CartItem(String productId,  double price, String priceCurrencyCode, int quantity, double unitPrice, String discount, List<String> tags) {
+        this.discount = discount;
+        this.price = price;
+        this.priceCurrencyCode = priceCurrencyCode;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.tags = tags;
+        this.unitPrice = unitPrice;
+    }
 
     public String getDiscount() {
         return discount;
@@ -93,7 +105,7 @@ public class CartItem {
      * @return
      * The price
      */
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -102,7 +114,7 @@ public class CartItem {
      * @param price
      * The price
      */
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

@@ -7,10 +7,9 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_guest">Guest</string>
-    <string name="title">Товар</string>
-    <string name="total">Total:</string>
-    <string name="price">100 uan</string>
-    <string name="tags_sample">тег1, тег2, тег3, тег4, тег5, тег6</string>
+    <string name="total">Total: %1$d</string>
+    <string name="price"><u>Price: %1$.2f $</u></string>
+    <string name="tags_sample">tag1, tag2, tag3, tag4, tag5, tag6</string>
 
     <string name="title_cart">Cart</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -22,4 +21,8 @@
     </string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
+    <string name="item_added">Item added to cart</string>
+    <string name="select_action">Select Action:</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="goto_cart">Goto Cart</string>
 </resources>
