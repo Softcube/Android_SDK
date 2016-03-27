@@ -50,6 +50,10 @@ public class GeneralInfo {
     @SerializedName("device")
     @Expose
     private Device device;
+    @SerializedName("user_device_id")
+    @Expose
+    private String userDeviceId;
+
 
 
     public static GeneralInfo create(Context context, String eventName, String userName, String userEmail){
@@ -284,5 +288,13 @@ public class GeneralInfo {
 
     public void setDevice(Device device) {
         this.device = device;
+    }
+
+    public String getUserDeviceId() {
+        return userDeviceId;
+    }
+
+    public void setUserDeviceId(String userDeviceId) {
+        this.userDeviceId = userDeviceId;
     }
 }
