@@ -8,6 +8,19 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Enables vibration permission for notification. -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <permission
+        android:name="softcube.com.shopsample.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="softcube.com.shopsample.permission.C2D_MESSAGE" />
+
+    <!-- This app has permission to register and receive data message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
 
     <application
@@ -22,6 +35,13 @@
         <meta-data
             android:name="com.softcube.siteId"
             android:value="test" />
+        <meta-data
+            android:name="PW_APPID"
+            android:value="7B47B-B645E" />
+        <meta-data
+            android:name="PW_PROJECT_ID"
+            android:value="A608613573440" />
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
@@ -50,9 +70,50 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="softcube.com.shopsample.ItemListActivity" />
         </activity>
-        <activity android:name=".ShopingCartActivity"
+        <activity
+            android:name=".ShopingCartActivity"
             android:label="@string/title_cart"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name="com.pushwoosh.richpages.RichPageActivity" />
+        <activity android:name="com.pushwoosh.MessageActivity" />
+        <activity android:name="com.pushwoosh.PushHandlerActivity" />
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="PACKAGE_NAME" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.pushwoosh.GCMListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.pushwoosh.GCMInstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.pushwoosh.GCMRegistrationService"
+            android:exported="false"/>
+
     </application>
 
 </manifest>
